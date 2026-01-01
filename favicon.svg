@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Goblin face background -->
+  <circle cx="32" cy="32" r="30" fill="#2d5a3d"/>
+
+  <!-- Ears -->
+  <ellipse cx="8" cy="28" rx="8" ry="12" fill="#3d7a5d"/>
+  <ellipse cx="56" cy="28" rx="8" ry="12" fill="#3d7a5d"/>
+
+  <!-- Face -->
+  <circle cx="32" cy="34" r="22" fill="#4a9d5b"/>
+
+  <!-- Eyes -->
+  <ellipse cx="24" cy="30" rx="6" ry="7" fill="white"/>
+  <ellipse cx="40" cy="30" rx="6" ry="7" fill="white"/>
+  <circle cx="25" cy="31" r="3" fill="#1a1a1a"/>
+  <circle cx="41" cy="31" r="3" fill="#1a1a1a"/>
+
+  <!-- Eyebrows -->
+  <path d="M18 22 Q24 19 30 23" stroke="#2d5a3d" stroke-width="2" fill="none"/>
+  <path d="M34 23 Q40 19 46 22" stroke="#2d5a3d" stroke-width="2" fill="none"/>
+
+  <!-- Nose -->
+  <ellipse cx="32" cy="40" rx="4" ry="3" fill="#3d7a5d"/>
+
+  <!-- Mouth/Smile -->
+  <path d="M22 48 Q32 56 42 48" stroke="#2d5a3d" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Teeth -->
+  <rect x="26" y="48" width="4" height="5" fill="white" rx="1"/>
+  <rect x="34" y="48" width="4" height="5" fill="white" rx="1"/>
+</svg>
