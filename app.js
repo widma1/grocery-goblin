@@ -2,10 +2,103 @@
 
 let items = JSON.parse(localStorage.getItem('goblinItems')) || [];
 
+// ========== VOICE RECOGNITION ==========
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition = null;
+let isListening = false;
+
+function initVoiceRecognition() {
+    if (!SpeechRecognition) {
+        document.getElementById('voiceBtn').style.display = 'none';
+        return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = () => {
+        isListening = true;
+        document.getElementById('voiceBtn').classList.add('listening');
+        document.getElementById('voiceStatus').textContent = 'Listening... say "add [item]" or "remove [item]"';
+    };
+
+    recognition.onend = () => {
+        isListening = false;
+        document.getElementById('voiceBtn').classList.remove('listening');
+        document.getElementById('voiceStatus').textContent = '';
+    };
+
+    recognition.onerror = (event) => {
+        isListening = false;
+        document.getElementById('voiceBtn').classList.remove('listening');
+        if (event.error === 'not-allowed') {
+            document.getElementById('voiceStatus').textContent = 'Microphone access denied';
+        } else {
+            document.getElementById('voiceStatus').textContent = '';
+        }
+    };
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase().trim();
+        handleVoiceCommand(transcript);
+    };
+}
+
+function toggleVoice() {
+    if (!recognition) {
+        alert('Voice recognition is not supported in your browser. Try Chrome or Edge.');
+        return;
+    }
+
+    if (isListening) {
+        recognition.stop();
+    } else {
+        recognition.start();
+    }
+}
+
+function handleVoiceCommand(transcript) {
+    const statusEl = document.getElementById('voiceStatus');
+
+    // Check for "add" command
+    const addMatch = transcript.match(/^(?:add|at|had)\s+(.+)$/);
+    if (addMatch) {
+        const itemText = addMatch[1];
+        document.getElementById('itemInput').value = itemText;
+        addItem();
+        statusEl.textContent = `Added: ${itemText}`;
+        setTimeout(() => { statusEl.textContent = ''; }, 2000);
+        return;
+    }
+
+    // Check for "remove" or "delete" command
+    const removeMatch = transcript.match(/^(?:remove|delete)\s+(.+)$/);
+    if (removeMatch) {
+        const itemText = removeMatch[1].toLowerCase();
+        const itemToRemove = items.find(i => i.text.toLowerCase().includes(itemText));
+        if (itemToRemove) {
+            deleteItem(itemToRemove.id);
+            statusEl.textContent = `Removed: ${itemToRemove.text}`;
+        } else {
+            statusEl.textContent = `Couldn't find: ${itemText}`;
+        }
+        setTimeout(() => { statusEl.textContent = ''; }, 2000);
+        return;
+    }
+
+    // Unrecognized command
+    statusEl.textContent = `Heard: "${transcript}" - try "add [item]" or "remove [item]"`;
+    setTimeout(() => { statusEl.textContent = ''; }, 3000);
+}
+
 // Initialize the list on page load
 document.addEventListener('DOMContentLoaded', () => {
     loadFromURL();
     renderList();
+    initVoiceRecognition();
     document.getElementById('itemInput').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addItem();
     });

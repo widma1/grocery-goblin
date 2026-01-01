@@ -78,6 +78,43 @@ h1 {
     transform: scale(1.05);
 }
 
+#voiceBtn {
+    flex-shrink: 0;
+    padding: 15px;
+    background: #2d5a3d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#voiceBtn:hover {
+    background: #3d7a5d;
+    transform: scale(1.05);
+}
+
+#voiceBtn.listening {
+    background: #e53935;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.voice-status {
+    text-align: center;
+    color: #2d5a3d;
+    font-size: 0.9rem;
+    min-height: 1.5em;
+    margin-bottom: 10px;
+}
+
 #shoppingList {
     list-style: none;
     margin-bottom: 20px;
