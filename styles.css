@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2d1b4e 0%, #1a3a2a 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #2d5a3d;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 0 #90EE90;
+}
+
+.tagline {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#itemInput {
+    flex: 1;
+    padding: 15px;
+    border: 3px solid #2d5a3d;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+#itemInput:focus {
+    outline: none;
+    border-color: #90EE90;
+}
+
+#addBtn {
+    padding: 15px 20px;
+    background: #2d5a3d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+#addBtn:hover {
+    background: #3d7a5d;
+    transform: scale(1.05);
+}
+
+#shoppingList {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f8f8f8;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.list-item:hover {
+    background: #e8f5e9;
+}
+
+.list-item.completed {
+    background: #c8e6c9;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.list-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+    accent-color: #2d5a3d;
+}
+
+.list-item span {
+    flex: 1;
+    font-size: 1.1rem;
+}
+
+.delete-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
+    background: #ee5a5a;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 2px dashed #ddd;
+}
+
+#itemCount {
+    color: #666;
+    font-weight: bold;
+}
+
+#clearBtn {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+#clearBtn:hover {
+    background: #f57c00;
+}
+
+.empty-message {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-style: italic;
+}
+
+/* Share Section */
+.share-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#shareBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+#shareBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 2rem;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    color: #2d5a3d;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.modal-tagline {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.share-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.share-option {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.share-option h3 {
+    color: #2d5a3d;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.link-container {
+    display: flex;
+    gap: 10px;
+}
+
+.link-container input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+.link-container button,
+.share-option > button {
+    padding: 10px 20px;
+    background: #2d5a3d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.link-container button:hover,
+.share-option > button:hover {
+    background: #3d7a5d;
+}
+
+.sms-btn {
+    width: 100%;
+    padding: 15px !important;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+    font-size: 1rem;
+}
+
+.sms-btn:hover {
+    opacity: 0.9;
+}
+
+#copyStatus {
+    display: block;
+    margin-top: 8px;
+    color: #2d5a3d;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+#plainTextList {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.share-option > button {
+    width: 100%;
+}

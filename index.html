@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Goblin - Your Hungry Shopping List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Grocery Goblin</h1>
+            <p class="tagline">"Feed me your shopping needs!"</p>
+        </header>
+
+        <div class="input-section">
+            <input type="text" id="itemInput" placeholder="What does the goblin crave?" autofocus>
+            <button id="addBtn" onclick="addItem()">Gobble It Up!</button>
+        </div>
+
+        <ul id="shoppingList"></ul>
+
+        <div class="stats">
+            <span id="itemCount">0 items to hunt</span>
+            <button id="clearBtn" onclick="clearAll()">Goblin Burp (Clear All)</button>
+        </div>
+
+        <div class="share-section">
+            <button id="shareBtn" onclick="openShareModal()">Share Goblin's Loot!</button>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeShareModal()">&times;</span>
+            <h2>Share Your Loot!</h2>
+            <p class="modal-tagline">Spread the goblin's treasures</p>
+
+            <div class="share-options">
+                <div class="share-option">
+                    <h3>Copy Magic Link</h3>
+                    <div class="link-container">
+                        <input type="text" id="shareLink" readonly>
+                        <button onclick="copyLink()">Copy!</button>
+                    </div>
+                    <span id="copyStatus"></span>
+                </div>
+
+                <div class="share-option">
+                    <h3>Send via Carrier Pigeon (SMS)</h3>
+                    <button class="sms-btn" onclick="shareViaSMS()">Send Text Message</button>
+                </div>
+
+                <div class="share-option">
+                    <h3>Plain Text List</h3>
+                    <textarea id="plainTextList" readonly></textarea>
+                    <button onclick="copyPlainText()">Copy Text</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
